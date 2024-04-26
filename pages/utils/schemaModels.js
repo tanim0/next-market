@@ -12,4 +12,5 @@ const ItemSchema = new Schema({
   email: String,
 })
 
+// ModelはMongoDBからデータの読み取りを行う機能を格納
 export const ItemModel = mongoose.models.Item|| mongoose.model("Item", ItemSchema)
