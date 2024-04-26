@@ -4,7 +4,6 @@ import { ItemModel } from "../../utils/schemaModels"
 const createItem = async(req, res) => {
   try{
     await connectDB()
-    console.log(req.body)
     await ItemModel.create(req.body) // ItemModelを使ってMongoDBに書き込み
     return res.status(200).json({message: "アイテム作成成功"})
   } catch(err) {

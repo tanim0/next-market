@@ -8,7 +8,11 @@
 <body>
   <h1>データ入力窓口</h1>
   <form action="http://localhost:3000/api/item/create" method="POST">
-    <input type="text" name="title">
+    タイトル：<input type="text" name="title">
+    イメージ：<input type="text" name="image">
+    価格：<input type="text" name="price">
+    説明：<textarea type="text" name="description"></textarea>
+    メールアドレス：<input type="text" name="email">
     <button type="submit">投稿</button>
   </form>
   
