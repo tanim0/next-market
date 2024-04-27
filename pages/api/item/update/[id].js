@@ -1,5 +1,5 @@
 import connectDB from "../../../utils/database"
-import { ItemModel } from "../../../utils/schemaModels"
+import { ItemModel } from "../../../../lib/schemaModels"
 import auth from "../../../utils/auth"
 
 // データの修正にはItemModelに格納されたupdateOne()を使う

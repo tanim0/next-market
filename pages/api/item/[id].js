@@ -2,7 +2,7 @@
 // シングルデータのurlはデータを保存した時にMongoDBが自動で割り当ててくれる_idになるのでそれを取得する
 
 import connectDB from "../../utils/database"
-import { ItemModel } from "../../utils/schemaModels"
+import { ItemModel } from "../../../lib/schemaModels"
 
 const getSingleItem = async(req, res) => {
   try{

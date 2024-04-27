@@ -1,5 +1,5 @@
 import connectDB from "../../../utils/database";
-import { ItemModel } from "../../../utils/schemaModels";
+import { ItemModel } from "../../../../lib/schemaModels";
 import auth from "../../../utils/auth";
 
 // データの柵書にはItemModelに格納されたdeleteOne()を使う
