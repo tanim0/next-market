@@ -1,6 +1,6 @@
-import connectDB from "../../../utils/database"
+import connectDB from "../../../../utils/database"
 import { ItemModel } from "../../../../utils/schemaModels"
-import auth from "../../../utils/auth"
+import auth from "../../../../utils/auth"
 
 // データの修正にはItemModelに格納されたupdateOne()を使う
 const updateItem = async(req, res) => {

@@ -1,6 +1,6 @@
 import connectDB from "../../../../utils/database";
 import { ItemModel } from "../../../../utils/schemaModels";
-import auth from "../../../utils/auth";
+import auth from "../../../../utils/auth";
 
 // データの柵書にはItemModelに格納されたdeleteOne()を使う
 const deleteItem = async(req, res) => {
