@@ -27,6 +27,7 @@ const loguinUser = async(req, res) => {
           email: req.body.email,
         }
         const token = jwt.sign(payload, secret_key, {expiresIn: "23h"})
+        console.log(token)
         // tokenはLocalStrageに保存される
 
         return res.status(200).json({"message": "ログイン成功"})

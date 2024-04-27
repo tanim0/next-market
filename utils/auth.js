@@ -15,7 +15,7 @@ const auth = (handler) => {
     }
 
     // const token = await req.headers.authorization.split("")[1]
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQG1vbmdvcm9yb3Jvcm9uLmNvbSIsImlhdCI6MTcxNDE0MDAzMiwiZXhwIjoxNzE0MjIyODMyfQ.gRzLsSw4ilQrbvKNSlMIDKapVo7Ai65lpJmDPy2dgJA"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1uZ2xAbW5nbG1uZ2wuY29tIiwiaWF0IjoxNzE0MjI1NzA4LCJleHAiOjE3MTQzMDg1MDh9.PCM6aWbDUcKK4Sdknu4Z59TDvbfu6gcPmxccb1qiH4Q"
     // トークンの処理を済ませてからトークンがない場合の処理へ
 
     if(!token) {
