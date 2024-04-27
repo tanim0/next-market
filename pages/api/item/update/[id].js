@@ -1,5 +1,6 @@
 import connectDB from "../../../utils/database"
 import { ItemModel } from "../../../utils/schemaModels"
+import auth from "../../../utils/auth"
 
 // データの修正にはItemModelに格納されたupdateOne()を使う
 const updateItem = async(req, res) => {
@@ -14,4 +15,4 @@ const updateItem = async(req, res) => {
   
 }
 
-export default updateItem
+export default auth(updateItem)

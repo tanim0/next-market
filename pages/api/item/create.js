@@ -1,5 +1,6 @@
 import connectDB from "../../utils/database"
 import { ItemModel } from "../../utils/schemaModels"
+import auth from "../../utils/auth"
 
 const createItem = async(req, res) => {
   try{
@@ -11,7 +12,8 @@ const createItem = async(req, res) => {
   }
 }
 
-export default createItem
+// このファイルのコードが実行される前にauthが実行される
+export default auth(createItem)
 
 // フロントエンド(form.html)から投稿されたデータはreqのbodyに含まれてcreate.jsに渡されている
 // (titleはinputのname属性と対応)
