@@ -1,5 +1,5 @@
 import connectDB from "../../utils/database"
-import { UserModel } from "../../utils/schemaModels"
+import { UserModel } from "../../../lib/schemaModels"
 
 const registerUser = async(req, res) => {
   try{
