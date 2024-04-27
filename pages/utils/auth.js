@@ -24,8 +24,11 @@ const auth = (handler) => {
 
     // トークンがある場合・・・有効性の判定
     try{
-      const decoded =jwt.verify(token, secret_key)
-      console.log(decoded)
+      // jwt.verify は 引数で渡された JWT 文字列と鍵情報を用いて JWT の検証と読み取りを行う。
+      const decoded = jwt.verify(token, secret_key)
+      
+      // トークンのメールアドレスとupdate/[id].jsとdelete/[id].jsに渡す(アイテムデータを登録したその人のみが修正と削除可能にするために使用)
+      req.body.email = decoded.email
       return handler(req, res)
     }catch(err){
       // 不正なトークン、有効期限切れの場合
