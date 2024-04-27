@@ -29,15 +29,7 @@ const UserSchema = new Schema({
   }
 })
 
-const test = () => {
-  return (
-    <div></div>
-  )
-}
-
 // ModelはMongoDBからデータの読み取りを行う機能を格納
 export const ItemModel = mongoose.models.Item || mongoose.model("Item", ItemSchema)
 
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
-
-export default test
