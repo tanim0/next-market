@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
-import connectDB from "../../utils/database"
-import { UserModel } from "../../../lib/schemaModels"
+import connectDB from "../../../utils/database"
+import { UserModel } from "../../../utils/schemaModels"
 
 // ログインを維持する仕組みとして今回はトークン方式を使う(セッション方式もある)
 // jsonwebtokenはトークンを発行するjwt.sign()と

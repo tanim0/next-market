@@ -1,5 +1,5 @@
-import connectDB from "../../utils/database"
-import { ItemModel } from "../../../lib/schemaModels"
+import connectDB from "../../../utils/database"
+import { ItemModel } from "../../../utils/schemaModels"
 
 const getAllItems = async(req, res) => {
   try{
