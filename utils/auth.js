@@ -14,8 +14,8 @@ const auth = (handler) => {
       return handler(req, res)
     }
 
-    // const token = await req.headers.authorization.split("")[1]
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1uZ2xAbW5nbG1uZ2wuY29tIiwiaWF0IjoxNzE0MjI1NzA4LCJleHAiOjE3MTQzMDg1MDh9.PCM6aWbDUcKK4Sdknu4Z59TDvbfu6gcPmxccb1qiH4Q"
+    // フロントエンドから送られたリクエストのheadersからトークンを取得
+    const token = await req.headers.authorization.split(" ")[1] //「Bearer トークン文字列」という形でデータが入ってくるのでトークンの部分だけに加工
     // トークンの処理を済ませてからトークンがない場合の処理へ
 
     if(!token) {
