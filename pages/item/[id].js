@@ -1,6 +1,7 @@
 // 1つの商品情報を表示するページ(フロント側のread.jsに当たるファイル)
 
 import Image from "next/image"
+import Link from "next/link"
 
 const ReadSingleItem = (props) => {
   return (
@@ -13,6 +14,12 @@ const ReadSingleItem = (props) => {
         <h2>¥{props.singleItem.price}</h2>
         <hr />
         <p>{props.singleItem.description}</p>
+
+        <div>
+          <Link href={`/item/update/${props.singleItem._id}`}>編集</Link>
+          <Link href={`/item/delete/${props.singleItem._id}`}>削除</Link>
+        </div>
+        
       </div>
     </div>
   )
