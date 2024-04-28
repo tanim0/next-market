@@ -2,9 +2,25 @@ import { useState } from "react"
 
 const Register = () => {
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  // ★stateを複数の項目をまとめた書き方にする
+  // const [name, setName] = useState("")
+  // const [email, setEmail] = useState("")
+  // const [password, setPassword] = useState("")
+  // ↓
+  // stateを1つにまとめて管理、操作
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
+  // ↓
+  // stateにデータを書き込むsetName()やsetPassword()も一つにまとめる(<input>も併せて修正)
+  const handleChange = (e) => {
+    setNewUser({
+      ...newUser, // スプレッド構文（それぞれの項目に新しいデータを書き込む）
+      [e.target.name]: e.target.value // e.target.name=それぞれ入力されてるstate内の項目名(name,email,password)に対して入力してる内容をvalueとして設定
+    })
+  }
   
   const handleSubmit = async(e) => {
     e.preventDefault() // <form>で<button>を押して送信処理をするとリロードされてしまう設計を止める
@@ -17,11 +33,7 @@ const Register = () => {
           "Accept": "application/json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({  //Json.stringify()・・・json形式に変換
-          name: name,
-          email: email,
-          password: password
-        })
+        body: JSON.stringify(newUser)
       })
       const jsonData = await response.json() //レスポンスデータはストリームという特殊な形式なのでjsonに変換
       alert(jsonData.message) // api.registerで設定したresの中にあるmessageをアラート表示
@@ -34,9 +46,9 @@ const Register = () => {
     <div>
       <h1>ユーザー登録</h1>
       <form onSubmit={handleSubmit}>
-        <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" placeholder="名前" />
-        <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="email" placeholder="メールアドレス" />
-        <input value={password} onChange={(e) => setPassword(e.target.value)}type="text" name="password" placeholder="パスワード" />
+        <input value={newUser.name} onChange={handleChange} type="text" name="name" placeholder="名前" required/>
+        <input value={newUser.email} onChange={handleChange} type="text" name="email" placeholder="メールアドレス" required/>
+        <input value={newUser.password} onChange={handleChange}type="text" name="password" placeholder="パスワード" required/>
         <button>登録</button>
       </form>
     </div>
