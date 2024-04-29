@@ -36,3 +36,8 @@ export interface ExtendedNextApiRequestAuth extends NextApiRequest {
 export interface ResMessageType {
   message: string
 }
+
+// ▼ register.te, login.ts
+export interface ExtendedNextApiRequestUser extends NextApiRequest {
+  body: UserDataType
+}
