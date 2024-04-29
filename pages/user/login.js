@@ -2,6 +2,7 @@
 // ログインが成功したか失敗したかを知らせるレスポンスを受け取る
 
 import { useState } from "react"
+import Head from "next/head"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -38,7 +39,8 @@ const Login = () => {
 
   return (
     <div>
-      <h1>ログイン</h1>
+      <Head><title>ログイン</title></Head>
+      <h1 className="page-title">ログイン</h1>
       <form onSubmit={handleSubmit}>  
         <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="email" placeholder="メールアドレス"/>
         <input value={password} onChange={(e) => setPassword(e.target.value)} type="text" name="password" placeholder="パスワード"/>
