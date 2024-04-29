@@ -1,4 +1,5 @@
 import type { NextApiRequest } from "next"
+import { Types } from "mongoose"
 
 // ▼ schemaModels.ts
 export interface ItemDataType {
@@ -35,9 +36,16 @@ export interface ExtendedNextApiRequestAuth extends NextApiRequest {
 // responseのmessageはmessage: "〜〜〜"としているのでstringとなっている(型推論)が、””がなかったら何のデータでも入ってくる状態なのでstringを設定する
 export interface ResMessageType {
   message: string
+  token?: string // 「?」でResMessageTypeの型定義を「tokenがあるものとないものがある」とする(messageはどの結果でも表示するがtokenはstatus(200)の時だけに入ってくる場合もあるので)
 }
 
 // ▼ register.te, login.ts
 export interface ExtendedNextApiRequestUser extends NextApiRequest {
   body: UserDataType
+}
+
+// ▼ login.ts
+// savedUserDataの型定義はUserDataType + MongoDB保存時に付与される_idに対する型定義が必要
+export interface SavedUserDataType extends UserDataType {
+  _id: Types.ObjectId  //Mongoose(MongoDBを操作するためのライブラリ)の用意している専用の型情報
 }

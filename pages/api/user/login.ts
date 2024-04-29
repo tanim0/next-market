@@ -1,3 +1,5 @@
+import type { NextApiResponse } from "next"
+import { ExtendedNextApiRequestUser, SavedUserDataType, ResMessageType } from "../../../utils/types"
 import jwt from "jsonwebtoken"
 import connectDB from "../../../utils/database"
 import { UserModel } from "../../../utils/schemaModels"
@@ -12,10 +14,14 @@ const secret_key = "nextmarket" // シークレットキー設定
 // ログイン機能は
 // その人が登録を済ませているかチェック(DBからユーザーデータを取得しその人がすでに登録しているか調べる)
 // 登録を済ませている場合はpasswordが正しいかチェック
-const loguinUser = async(req, res) => {
+// 型定義はregister.tsと同じ
+const loguinUser = async(req: ExtendedNextApiRequestUser, res: NextApiResponse<ResMessageType>) => {
   try{
     await connectDB()
-    const savedUserData = await UserModel.findOne({email: req.body.email})
+
+    // savedUserDataの型定義はUserDataType + MongoDB保存時に付与される_idに対する型定義が必要
+    // | null はその値が存在しない(=DBにユーザーデータが存在しない時のために必要)
+    const savedUserData: SavedUserDataType | null = await UserModel.findOne({email: req.body.email})
     
     if(savedUserData) {
       // ユーザーデータが存在する場合の処理
