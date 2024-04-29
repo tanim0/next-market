@@ -296,3 +296,8 @@ footer{
   text-align: center;
   margin: 3rem 0;
 }
+
+/* 追加 */
+.item-img-list {
+  height: 55%;
+}
