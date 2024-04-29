@@ -59,11 +59,18 @@ export interface SavedItemDataType extends ItemDataType {
 // ▼ readAll.ts
 // 結果によってフロントに返すレスポンスにallItemsが含まれている場合もあるのでそれも定義
 export interface ResReadAllType {
-  message: string,
+  message: string
   allItems?: SavedItemDataType[]
 }
 
 // ▼ create.ts
 export interface ExtendedNextApiRequestItem extends NextApiRequest {
   body: ItemDataType
+}
+
+// ▼ [id].ts
+// ではmessage、singleItemの定義が必要singleItemは「ItemDataType+_id」なのでSavedItemDataTypeを使う
+export interface ResReadSingleType {
+  message: string
+  singleItem?: SavedItemDataType
 }
