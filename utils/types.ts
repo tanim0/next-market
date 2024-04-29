@@ -49,3 +49,16 @@ export interface ExtendedNextApiRequestUser extends NextApiRequest {
 export interface SavedUserDataType extends UserDataType {
   _id: Types.ObjectId  //Mongoose(MongoDBを操作するためのライブラリ)の用意している専用の型情報
 }
+
+// ▼ readAll.ts, [id].ts, update/[id].ts, delete/[id].ts
+// allItemの型定義はアイテムデータ＋アイテムデータをDB登録時に付与される「_id」
+export interface SavedItemDataType extends ItemDataType {
+  _id: Types.ObjectId 
+}
+
+// ▼ readAll.ts
+// 結果によってフロントに返すレスポンスにallItemsが含まれている場合もあるのでそれも定義
+export interface ResReadAllType {
+  message: string,
+  allItems?: SavedItemDataType[]
+}
