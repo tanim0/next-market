@@ -1,12 +1,15 @@
+import type { NextApiResponse } from "next";
+import { ExtendedNextApiRequestItem, SavedItemDataType, ResMessageType } from "../../../../utils/types";
 import connectDB from "../../../../utils/database";
 import { ItemModel } from "../../../../utils/schemaModels";
 import auth from "../../../../utils/auth";
 
 // データの柵書にはItemModelに格納されたdeleteOne()を使う
-const deleteItem = async(req, res) => {
+const deleteItem = async(req: ExtendedNextApiRequestItem, res: NextApiResponse<ResMessageType>) => {
   try{
     await connectDB()
-    const singleItem = await ItemModel.findById(req.query.id)
+    const singleItem: SavedItemDataType | null = await ItemModel.findById(req.query.id)
+    if(!singleItem) return res.status(400).json({message: "アイテムが存在していないため削除失敗"})
     if(singleItem.email === req.body.email) {
       await ItemModel.deleteOne({_id: req.query.id})
       return res.status(200).json({message: "アイテム削除成功"})
