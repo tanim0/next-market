@@ -1,29 +1,11 @@
 // auth.js=ミドルウェア([id].jsのように特定のurlを持ったものでなく、urlを持ったファイルの機能を補助する。(これらのファイルが実行される前にトークンを確認し、ログイン状態を調べる))
 
 // req,resの型定義に使用(req,resにはさまざまな情報が含まれるがその型定義Next.jsがしておいてくれている)
-import type { NextApiRequest, NextApiResponse } from "next"
+import type { NextApiResponse } from "next"
+import { ExtendedNextApiRequestAuth, DecodedType, ResMessageType } from "./types"
 
 import jwt from "jsonwebtoken"
 
-interface DecodedType {
-  email: string
-}
-
-// command押しながらプロパティ等クリックするとその型を定義しているコードが開かれる(req.bodyのbodyなど)
-// reqのbodyにはどんなデータが入ってくるかわからないのでanyとされているため、自分でNextApiRequestを拡張し設定する
-interface ExtendedNextApiRequestAuth extends NextApiRequest {
-  headers: {
-    authorization: string
-  },
-  body: {
-    email: string
-  }
-}
-
-// responseのmessageはmessage: "〜〜〜"としているのでstringとなっている(型推論)が、””がなかったら何のデータでも入ってくる状態なのでstringを設定する
-interface ResMessageType {
-  message: string
-}
 
 const secret_key = "nextmarket"
 

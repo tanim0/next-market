@@ -1,22 +1,9 @@
 // Shemaを作り保存するデータの形をあらかじめ定める
 
 import mongoose from "mongoose";
+import { ItemDataType, UserDataType } from "./types";
 
 const Schema = mongoose.Schema
-
-interface ItemDataType {
-  title: string,
-  image: string,
-  price: string
-  description: string,
-  email: string,
-}
-
-interface UserDataType {
-  name: string,
-  email: string,
-  password: string
-}
 
 const ItemSchema = new Schema<ItemDataType>({
   title: String,
@@ -43,15 +30,7 @@ const UserSchema = new Schema<UserDataType>({
   }
 })
 
-// const test = () => {
-//   return (
-//     <div></div>
-//   )
-// }
-
 // ModelはMongoDBからデータの読み取りを行う機能を格納
 export const ItemModel = mongoose.models.Item || mongoose.model("Item", ItemSchema)
 
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
-
-// export default test
