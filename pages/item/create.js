@@ -12,7 +12,7 @@ const CreateItem = () => {
     e.preventDefault() //formをbuttonで実行した際のブラウザのリロードを止める
     try{
       // データ送付が完了した時にバックエンドから返されるレスポンスと確認できるようresponseに格納し返されたデータをjson形式に変更
-      const response = await fetch("http://localhost:3000/api/item/create", {
+      const response = await fetch("https://next-market-sage.vercel.app/api/item/create", {
         method: "POST",
         headers: {
           "Accept": "application/json",

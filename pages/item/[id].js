@@ -31,7 +31,7 @@ export default ReadSingleItem
 
 // urlのデータはcontextのqueryのidに入っている
 export const getServerSideProps = async(context) => {
-  const response = await fetch(`http://localhost:3000/api/item/${context.query.id}`)
+  const response = await fetch(`https://next-market-sage.vercel.app/api/item/${context.query.id}`)
   const singleItem = await response.json()
 
   // データはreturnにセットすることでconst getServerSideProps = () => {...}にpropsとして渡される

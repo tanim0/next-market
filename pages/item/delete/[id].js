@@ -14,7 +14,7 @@ const DeleteItem = (props) => {
     e.preventDefault() //formをbuttonで実行した際のブラウザのリロードを止める
     try{
       // データ送付が完了した時にバックエンドから返されるレスポンスと確認できるようresponseに格納し返されたデータをjson形式に変更
-      const response = await fetch(`http://localhost:3000/api/item/delete/${props.singleItem._id}`, {
+      const response = await fetch(`https://next-market-sage.vercel.app/api/item/delete/${props.singleItem._id}`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -56,7 +56,7 @@ export default DeleteItem
 // バックエンドからデータ取得(1つだけアイテムデータを読み取りデータをpropsへ渡す)
 // urlのデータはcontextのqueryのidに入っている
 export const getServerSideProps = async(context) => {
-  const response = await fetch(`http://localhost:3000/api/item/${context.query.id}`)
+  const response = await fetch(`https://next-market-sage.vercel.app/api/item/${context.query.id}`)
   const singleItem = await response.json()
 
   // データはreturnにセットすることでconst getServerSideProps = () => {...}にpropsとして渡される
