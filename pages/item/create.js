@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useAuth from "../../utils/useAuth"
 import Head from "next/head"
+import ImgInput from "../../components/imgInput"
 
 const CreateItem = () => {
   const [title, setTitle] = useState("")
@@ -43,11 +44,15 @@ const CreateItem = () => {
       <div>
         <Head><title>アイテム作成</title></Head>
         <h1 className="page-title">アイテム作成</h1>
+
+        {/* 画像アップロードコンポーネント */}
+        <ImgInput setImage={setImage} />
+        
         <form onSubmit={handleSubmit} method="POST">
-          タイトル：<input value={title} onChange={(e) => setTitle(e.target.value)}type="text" name="title" placeholder="アイテム名" required/>
-          価格：<input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="price" placeholder="価格" required />
-          イメージ：<input value={image} onChange={(e) => setImage(e.target.value)} type="text" name="image" placeholder="画像" required />
-          説明：<textarea value={description} onChange={(e) => setDescription(e.target.value)} type="text" name="description" placeholder="商品説明" required></textarea>
+          <input value={title} onChange={(e) => setTitle(e.target.value)}type="text" name="title" placeholder="アイテム名" required/>
+          <input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="price" placeholder="価格" required />
+          <input value={image} onChange={(e) => setImage(e.target.value)} type="text" name="image" placeholder="画像" required />
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} type="text" name="description" placeholder="商品説明" required></textarea>
           <button type="submit">作成</button>
         </form>
       </div>
