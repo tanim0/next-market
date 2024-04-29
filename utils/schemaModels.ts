@@ -4,15 +4,29 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
-const ItemSchema = new Schema({
+interface ItemDataType {
+  title: string,
+  image: string,
+  price: string
+  description: string,
+  email: string,
+}
+
+interface UserDataType {
+  name: string,
+  email: string,
+  password: string
+}
+
+const ItemSchema = new Schema<ItemDataType>({
   title: String,
   image: String,
-  price: String, String,
+  price: String,
   description: String,
   email: String,
 })
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<UserDataType>({
   name: {
     type: String,
     required: true,
@@ -29,15 +43,15 @@ const UserSchema = new Schema({
   }
 })
 
-const test = () => {
-  return (
-    <div></div>
-  )
-}
+// const test = () => {
+//   return (
+//     <div></div>
+//   )
+// }
 
 // ModelはMongoDBからデータの読み取りを行う機能を格納
 export const ItemModel = mongoose.models.Item || mongoose.model("Item", ItemSchema)
 
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
 
-export default test
+// export default test

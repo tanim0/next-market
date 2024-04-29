@@ -1,12 +1,36 @@
 // auth.js=ミドルウェア([id].jsのように特定のurlを持ったものでなく、urlを持ったファイルの機能を補助する。(これらのファイルが実行される前にトークンを確認し、ログイン状態を調べる))
 
+// req,resの型定義に使用(req,resにはさまざまな情報が含まれるがその型定義Next.jsがしておいてくれている)
+import type { NextApiRequest, NextApiResponse } from "next"
+
 import jwt from "jsonwebtoken"
+
+interface DecodedType {
+  email: string
+}
+
+// command押しながらプロパティ等クリックするとその型を定義しているコードが開かれる(req.bodyのbodyなど)
+// reqのbodyにはどんなデータが入ってくるかわからないのでanyとされているため、自分でNextApiRequestを拡張し設定する
+interface ExtendedNextApiRequestAuth extends NextApiRequest {
+  headers: {
+    authorization: string
+  },
+  body: {
+    email: string
+  }
+}
+
+// responseのmessageはmessage: "〜〜〜"としているのでstringとなっている(型推論)が、””がなかったら何のデータでも入ってくる状態なのでstringを設定する
+interface ResMessageType {
+  message: string
+}
 
 const secret_key = "nextmarket"
 
 // auth.jsはcreateItem,updateItem,deleteIttemを一度内部に受け取る(handler(任意))
-const auth = (handler) => {
-  return async(req, res) => {
+// handlerの型定義・・・アイテムの作成や編集といった操作実行の前にauth.jsを通過させるもの。つまりhandlerはcreate.jsや/update/[id].jsといった何らかの働きをするもの(=function)
+const auth = (handler: Function) => {
+  return async(req: ExtendedNextApiRequestAuth, res: NextApiResponse<ResMessageType>) => {
     // リクエストの種類の判別
     // GETの場合はログイン判定不要なのでこれ以上処理を進めない
     // また、form.html等では<form>はGET,POSTしか使えないのでPOSTを設定し、Modelに格納された機能で実際の処理を行っている
@@ -28,7 +52,8 @@ const auth = (handler) => {
       const decoded = jwt.verify(token, secret_key)
       
       // トークンのメールアドレスとupdate/[id].jsとdelete/[id].jsに渡す(アイテムデータを登録したその人のみが修正と削除可能にするために使用)
-      req.body.email = decoded.email
+      // (decoded as DecodedType)・・・decodedを型定義した書き方。asを使う=型アサーション
+      req.body.email = (decoded as DecodedType).email
       return handler(req, res)
     }catch(err){
       // 不正なトークン、有効期限切れの場合
