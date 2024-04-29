@@ -5,6 +5,7 @@
 // 商品修正ページからデータのstateの保持や入力データの送信を省いたものに近い
 
 import Image from "next/image"
+import useAuth from "../../../utils/useAuth"
 
 const DeleteItem = (props) => {
 
@@ -30,19 +31,22 @@ const DeleteItem = (props) => {
     }
   }
 
-  return (
-    <div>
-      <h1>アイテム削除</h1>
-      <form onSubmit={handleSubmit} method="POST">
-        <h2>{props.singleItem.title}</h2>
-        <Image src={props.singleItem.image} width="750" height="500" />
-        <h3>¥{props.singleItem.price}</h3>
-        <p>{props.singleItem.description}</p>
-        <button type="submit">削除</button>
-      </form>
-    </div>
-  )
+  const loginUser = useAuth()
 
+  if(loginUser === props.singleItem.email) {
+    return (
+      <div>
+        <h1>アイテム削除</h1>
+        <form onSubmit={handleSubmit} method="POST">
+          <h2>{props.singleItem.title}</h2>
+          <Image src={props.singleItem.image} width="750" height="500" />
+          <h3>¥{props.singleItem.price}</h3>
+          <p>{props.singleItem.description}</p>
+          <button type="submit">削除</button>
+        </form>
+      </div>
+    )
+  }
 }
 
 export default DeleteItem
