@@ -28,7 +28,7 @@ const Register = () => {
     try{
       // ユーザーのデータ作成はapi/user/register.jsで行われてる
       // バックエンドから返されたres.status...がconst responseの中へ格納される
-      const response = await fetch("https://next-market-sage.vercel.app/api/user/register", {
+      const response = await fetch("http://localhost:3000/api/user/register", {
         method: "POST",
         headers: { // リクエストで送るデータの種類やその他捕捉情報を追加
           "Accept": "application/json",

@@ -26,7 +26,7 @@ export default ReadAllItems
 
 // getServerSideProps・・・Neext.jsが用意しているでデータ取得のための特別な機能
 export const getServerSideProps = async() => {
-  const response = await fetch("https://next-market-sage.vercel.app/api/item/readall")
+  const response = await fetch("http://localhost:3000/api/item/readall")
   const allItems = await response.json()
 
   return {
