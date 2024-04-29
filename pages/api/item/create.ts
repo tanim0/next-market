@@ -1,8 +1,11 @@
+import type { NextApiResponse } from "next"
+import { ExtendedNextApiRequestItem, ResMessageType } from "../../../utils/types"
 import connectDB from "../../../utils/database"
 import { ItemModel } from "../../../utils/schemaModels"
 import auth from "../../../utils/auth"
 
-const createItem = async(req, res) => {
+// req.bodyがあるのでtypes.tsで型定義
+const createItem = async(req: ExtendedNextApiRequestItem, res: NextApiResponse<ResMessageType>) => {
   try{
     await connectDB()
     await ItemModel.create(req.body) // ItemModelを使ってMongoDBに書き込み

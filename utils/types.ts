@@ -62,3 +62,8 @@ export interface ResReadAllType {
   message: string,
   allItems?: SavedItemDataType[]
 }
+
+// ▼ create.ts
+export interface ExtendedNextApiRequestItem extends NextApiRequest {
+  body: ItemDataType
+}
