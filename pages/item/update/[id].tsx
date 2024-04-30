@@ -53,7 +53,7 @@ const UpdateItem: NextPage<ReadSingleDataType> = (props) => {
           タイトル：<input value={title} onChange={(e) => setTitle(e.target.value)}type="text" name="title" placeholder="アイテム名" required/>
           価格：<input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="price" placeholder="価格" required />
           イメージ：<input value={image} onChange={(e) => setImage(e.target.value)} type="text" name="image" placeholder="画像" required />
-          説明：<textarea value={description} onChange={(e) => setDescription(e.target.value)} type="text" name="description" placeholder="商品説明" required></textarea>
+          説明：<textarea value={description} onChange={(e) => setDescription(e.target.value)} name="description" placeholder="商品説明" required></textarea>
           <button type="submit">編集</button>
         </form>
       </div>
