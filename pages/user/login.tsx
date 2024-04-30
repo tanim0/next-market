@@ -1,14 +1,15 @@
 // ログインページ・・・メールアドレスとパスワードを入力してバックエンドへと送り
 // ログインが成功したか失敗したかを知らせるレスポンスを受け取る
 
+import type { NextPage } from "next"
 import { useState } from "react"
 import Head from "next/head"
 
-const Login = () => {
+const Login: NextPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try{
       const response = await fetch("http://localhost:3000/api/user/login", {
