@@ -1,7 +1,8 @@
+import type { NextPage } from "next"
 import Head from "next/head"
 import { useState } from "react"
 
-const Register = () => {
+const Register: NextPage = () => {
 
   // ★stateを複数の項目をまとめた書き方にする
   // const [name, setName] = useState("")
@@ -16,14 +17,14 @@ const Register = () => {
   })
   // ↓
   // stateにデータを書き込むsetName()やsetPassword()も一つにまとめる(<input>も併せて修正)
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setNewUser({
       ...newUser, // スプレッド構文（それぞれの項目に新しいデータを書き込む）
       [e.target.name]: e.target.value // e.target.name=それぞれ入力されてるstate内の項目名(name,email,password)に対して入力してる内容をvalueとして設定
     })
   }
   
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault() // <form>で<button>を押して送信処理をするとリロードされてしまう設計を止める
     try{
       // ユーザーのデータ作成はapi/user/register.jsで行われてる
