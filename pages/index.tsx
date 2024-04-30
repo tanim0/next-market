@@ -1,8 +1,10 @@
+import type { NextPage, GetServerSideProps } from "next"
+import { ReadAllDataType } from "../utils/types"
 import Link from "next/link"
 import Image from "next/image"
 import Head from "next/head"
 
-const ReadAllItems = (props) => {
+const ReadAllItems: NextPage<ReadAllDataType> = (props) => {
   return(
     <div>
       <Head><title>Next Market</title></Head>
@@ -25,7 +27,7 @@ const ReadAllItems = (props) => {
 export default ReadAllItems
 
 // getServerSideProps・・・Neext.jsが用意しているでデータ取得のための特別な機能
-export const getServerSideProps = async() => {
+export const getServerSideProps: GetServerSideProps<ReadAllDataType> = async() => {
   const response = await fetch("http://localhost:3000/api/item/readall")
   const allItems = await response.json()
 

@@ -87,3 +87,15 @@ export interface ReadSingleDataType {
     email: string
   }
 }
+
+// ▼ index.tsx
+export interface ReadAllDataType {
+  allItems: {
+    _id: string
+    title: string
+    image: string
+    price: string
+    description: string
+    email: string
+  }[]
+}
