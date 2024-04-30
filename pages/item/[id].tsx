@@ -1,15 +1,18 @@
 // 1つの商品情報を表示するページ(フロント側のread.jsに当たるファイル)
 
+import type { NextPage, GetServerSideProps } from "next"
+import { ReadSingleDataType } from "../../utils/types"
 import Image from "next/image"
 import Link from "next/link"
 import Head from "next/head"
 
-const ReadSingleItem = (props) => {
+// propsに含まれるsingleItemの型定義が必要(types.ts)
+const ReadSingleItem: NextPage<ReadSingleDataType> = (props) => {
   return (
     <div className="grid-container-si">
       <Head><title>{props.singleItem.title}</title></Head>
       <div>
-        <Image src={props.singleItem.image} width="750" height="500" />
+        <Image src={props.singleItem.image} width="750" height="500" alt="商品画像" />
       </div>
       <div>
         <h1>{props.singleItem.title}</h1>
@@ -30,7 +33,8 @@ const ReadSingleItem = (props) => {
 export default ReadSingleItem
 
 // urlのデータはcontextのqueryのidに入っている
-export const getServerSideProps = async(context) => {
+// getServerSideProps専用の型定義ReadSingleDataTypeとprop部分にReadSingleDataTypeを適用
+export const getServerSideProps: GetServerSideProps<ReadSingleDataType> = async(context) => {
   const response = await fetch(`http://localhost:3000/api/item/${context.query.id}`)
   const singleItem = await response.json()
 
