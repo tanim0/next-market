@@ -4,13 +4,15 @@
 
 // 商品修正ページからデータのstateの保持や入力データの送信を省いたものに近い
 
+import { NextPage, GetServerSideProps } from "next"
+import { ReadSingleDataType } from "../../../utils/types"
 import Image from "next/image"
 import useAuth from "../../../utils/useAuth"
 import Head from "next/head"
 
-const DeleteItem = (props) => {
+const DeleteItem: NextPage<ReadSingleDataType> = (props) => {
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault() //formをbuttonで実行した際のブラウザのリロードを止める
     try{
       // データ送付が完了した時にバックエンドから返されるレスポンスと確認できるようresponseに格納し返されたデータをjson形式に変更
@@ -41,7 +43,7 @@ const DeleteItem = (props) => {
         <h1 className="page-title">アイテム削除</h1>
         <form onSubmit={handleSubmit} method="POST">
           <h2>{props.singleItem.title}</h2>
-          <Image src={props.singleItem.image} width="750" height="500" />
+          <Image src={props.singleItem.image} width="750" height="500" alt="商品画像" />
           <h3>¥{props.singleItem.price}</h3>
           <p>{props.singleItem.description}</p>
           <button type="submit">削除</button>
@@ -55,7 +57,7 @@ export default DeleteItem
 
 // バックエンドからデータ取得(1つだけアイテムデータを読み取りデータをpropsへ渡す)
 // urlのデータはcontextのqueryのidに入っている
-export const getServerSideProps = async(context) => {
+export const getServerSideProps: GetServerSideProps<ReadSingleDataType> = async(context) => {
   const response = await fetch(`http://localhost:3000/api/item/${context.query.id}`)
   const singleItem = await response.json()
 
