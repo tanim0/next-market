@@ -1,17 +1,19 @@
 // 商品編集ページ・・・1つだけアイテムデータを読み取り＋アイテムデータを作成
 
+import { NextPage, GetServerSideProps } from "next"
+import { ReadSingleDataType } from "../../../utils/types"
 import { useState } from "react"
 import useAuth from "../../../utils/useAuth"
 import Head from "next/head"
 
-const UpdateItem = (props) => {
+const UpdateItem: NextPage<ReadSingleDataType> = (props) => {
   // 初期データは取得したデータが表示されるよう
   const [title, setTitle] = useState(props.singleItem.title)
   const [price, setPrice] = useState(props.singleItem.price)
   const [image, setImage] = useState(props.singleItem.image)
   const [description, setDescription] = useState(props.singleItem.description)
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault() //formをbuttonで実行した際のブラウザのリロードを止める
     try{
       // データ送付が完了した時にバックエンドから返されるレスポンスと確認できるようresponseに格納し返されたデータをjson形式に変更
@@ -63,7 +65,7 @@ export default UpdateItem
 
 // バックエンドからデータ取得(1つだけアイテムデータを読み取りデータをpropsへ渡す)
 // urlのデータはcontextのqueryのidに入っている
-export const getServerSideProps = async(context) => {
+export const getServerSideProps: GetServerSideProps<ReadSingleDataType> = async(context) => {
   const response = await fetch(`http://localhost:3000/api/item/${context.query.id}`)
   const singleItem = await response.json()
 
